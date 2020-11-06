@@ -1,0 +1,118 @@
+<%- include('./includes/header.ejs') %>
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <%- include('./includes/side-bar.ejs') %>
+    <!-- Dashboard Content
+    ================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Post a Certificate</h3>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li>Add Certificate</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-feather-award"></i> Certificate Submission Form</h3>
+                        </div>
+                        <%- include ("./partials/messages") %>
+                        <form action="/post-add-certificate" method="POST">
+
+                            <div class="content with-padding padding-bottom-10">
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Certificate Number</h5>
+                                            <input type="certificateNumber" class="with-border" name="certificateNumber"
+                                                id="certificateNumber">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Surname</h5>
+                                            <input type="surname" class="with-border" name="surname" id="surname">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Other Names</h5>
+                                            <input type="otherNames" class="with-border" name="otherNames"
+                                                id="otherNames">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Institution</h5>
+                                            <select name="institution" id="institution" class="selectpicker"
+                                                data-live-search="true">
+                                                <% if (institutions.length > 0) { %>
+                                                <% for (let institution of institutions) { %>
+                                                <option value="<%= institution.id %>"><%= institution.institutionName %>
+                                                </option>
+                                                <% } %>
+                                                <% } else { %>
+                                                <h1>No institutions Found!</h1>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Registration Number</h5>
+                                            <input type="regNumber" class="with-border" name="regNumber" id="regNumber">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Course</h5>
+                                            <select name="course" id="course" class="selectpicker"
+                                                data-live-search="true">
+                                                <% if (courses.length > 0) { %>
+                                                <% for (let course of courses) { %>
+                                                <option value="<%= course.id %>"><%= course.courseName %>
+                                                </option>
+                                                <% } %>
+                                                <% } else { %>
+                                                <h1>No courses Found!</h1>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <button type="submit" class="button ripple-effect big margin-top-30"><i
+                                        class="icon-feather-plus"></i> Add
+                                    Certificate
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Row / End -->
+            <%- include('./includes/footer.ejs') %>
