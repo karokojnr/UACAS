@@ -8,10 +8,13 @@ const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require('method-override');
 const chalk = require("chalk");
+const dotenv = require('dotenv');
+
 const path = require("path");
 const file = require("fs");
 
 const app = express();
+dotenv.config();
 //Passport config
 require("./config/passport")(passport);
 
