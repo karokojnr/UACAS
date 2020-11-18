@@ -57,12 +57,16 @@
                                                 <h4><a href="#"><%= certificate.surname %>
                                                         <%= certificate.otherNames %><img class="flag"
                                                             src="/images/flags/ke.svg" alt="" title="Kenya"
-                                                            data-tippy-placement="top"></a>
+                                                            data-tippy-placement="top"> - <span
+                                                            class="freelancer-detail-item">
+                                                            <%= certificate.course.courseName %></span></a>
                                                 </h4>
                                                 <div></div>
-                                                <h5>
-                                                    <%= certificate.course.courseName %>
-                                                </h5>
+                                                <!-- <h5>
+                                                    <%= certificate.course.courseName %> -->
+                                                <!-- </h5> -->
+
+
 
                                                 <!-- Details -->
                                                 <span class="freelancer-detail-item"><a href="#"><i
@@ -84,10 +88,12 @@
                                                     <form
                                                         action="/delete-certificate/<%= certificate._id %>?_method=DELETE"
                                                         method="post">
-                                                        <button type="submit" class="btn btn-danger">
-                                                            Delete
+                                                        <button type="submit"
+                                                            class="button ripple-effect">
+                                                            <i class="icon-feather-trash"></i> Delete
                                                         </button>
                                                     </form>
+
                                                 </div>
                                             </div>
                                         </div>

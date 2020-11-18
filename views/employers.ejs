@@ -9,13 +9,13 @@
 
             <!-- Dashboard Headline -->
             <div class="dashboard-headline">
-                <h3>Manage Institutions</h3>
+                <h3>Manage Employers</h3>
                 <!-- Breadcrumbs -->
                 <nav id="breadcrumbs" class="dark">
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Dashboard</a></li>
-                        <li>Manage Institutions</li>
+                        <li>Manage Employers</li>
                     </ul>
                 </nav>
             </div>
@@ -29,8 +29,8 @@
 
                         <!-- Headline -->
                         <div class="headline">
-                            <h3><i class="icon-material-outline-account-balance"></i> <%= institutionsLength %>
-                                Institutions
+                            <h3><i class="icon-material-outline-supervisor-account"></i> <%= employersNumber %>
+                                Employers
                             </h3>
                         </div>
 
@@ -40,59 +40,39 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Institution Name</th>
+                                            <th>Employer Name</th>
                                             <th>Approved</th>
-                                            <th>Update</th>
-                                            <th>Delete</th>
                                             <th>Activate</th>
                                             <th>Deactivate</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% if (institutions.length > 0) { %>
-                                        <% for (let institution of institutions) { %>
+                                        <% if (employers.length > 0) { %>
+                                        <% for (let employer of employers) { %>
                                         <tr>
-                                            <td><%= institution.institutionName %></td>
-                                            <td><%= institution.isInstitution %></td>
+                                            <td><%= employer.name %></td>
+                                            <td><%= employer.isEmployer %></td>
                                             <td>
-                                                <button class="btn btn-info">
-                                                    <a href="/get-edit-institution/<%= institution._id %>?edit=true">
-                                                        Update</a>
-                                                </button>
-
-                                            </td>
-                                            <td>
-                                                <form action="/delete-institution/<%= institution._id %>?_method=DELETE"
-                                                    method="post">
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="/activate-institution/<%= institution._id %>?_method=PUT"
+                                                <form action="/activate-employer/<%= employer._id %>?_method=PUT"
                                                     method="post">
                                                     <button type="submit" class="btn btn-info">
-                                                        Approve
+                                                        Approve account
                                                     </button>
                                                 </form>
 
                                             </td>
                                             <td>
-                                                <form
-                                                    action="/deactivate-institution/<%= institution._id %>?_method=PUT"
+                                                <form action="/deactivate-employer/<%= employer._id %>?_method=PUT"
                                                     method="post">
                                                     <button type="submit" class="btn btn-danger">
-                                                        Deactivate
+                                                        Deactivate account
                                                     </button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                         <% } %>
                                         <% } else { %>
-                                        <h1>No Institutions Found!</h1>
+                                        <h1>No Employers Found!</h1>
                                         <% } %>
                                     </tbody>
 

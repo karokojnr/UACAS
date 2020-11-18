@@ -5,28 +5,7 @@
         <script>document.write(new Date().getFullYear());</script>
         <strong>UACAS</strong>. All Rights Reserved.
     </div>
-    <ul class="footer-social-links">
-        <li>
-            <a href="#" title="Facebook" data-tippy-placement="top">
-                <i class="icon-brand-facebook-f"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" title="Twitter" data-tippy-placement="top">
-                <i class="icon-brand-twitter"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" title="Google Plus" data-tippy-placement="top">
-                <i class="icon-brand-google-plus-g"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" title="LinkedIn" data-tippy-placement="top">
-                <i class="icon-brand-linkedin-in"></i>
-            </a>
-        </li>
-    </ul>
+
     <div class="clearfix"></div>
 </div>
 <!-- Footer / End -->
@@ -106,7 +85,7 @@
 <script src="/js/tippy.all.min.js"></script>
 <script src="/js/simplebar.min.js"></script>
 <script src="/js/bootstrap-slider.min.js"></script>
-<script src="/js/bootstrap-select.min.js"></script>
+<!-- <script src="/js/bootstrap-select.min.js"></script> -->
 <script src="/js/snackbar.js"></script>
 <script src="/js/clipboard.min.js"></script>
 <script src="/js/counterup.min.js"></script>
@@ -144,14 +123,14 @@
 
         // The data for our dataset
         data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
+            labels: ['Institutions', 'Certificates', 'Courses', 'Employers'],
             // Information about the dataset
             datasets: [{
-                label: "Views",
+                label: 'UACAS DATA',
+                data: [<%= institutionsNumber %>, <%= certificatesNumber %>, <%= coursesNumber %>, <%= employersNumber %>],
                 backgroundColor: 'rgba(42,65,232,0.08)',
                 borderColor: '#2a41e8',
                 borderWidth: "3",
-                data: [196, 132, 215, 362, 210, 252],
                 pointRadius: 5,
                 pointHoverRadius: 5,
                 pointHitRadius: 10,
@@ -175,6 +154,9 @@
                 yAxes: [{
                     scaleLabel: {
                         display: false
+                    },
+                    ticks: {
+                        beginAtZero: true
                     },
                     gridLines: {
                         borderDash: [6, 10],

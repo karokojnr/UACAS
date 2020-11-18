@@ -1,20 +1,25 @@
 const Certificate = require("../models/Certificate")
 const Institution = require("../models/Institution")
 const Course = require("../models/Course")
+const Employer = require("../models/Employer")
 
 exports.getAddCertificate = async (req, res) => {
     const institutions = await Institution.find();
     const courses = await Course.find();
     const certificates = await Certificate.find();
+    const employers = await Employer.find();
+    const employersLength = employers.length;
     const certificatesLength = certificates.length;
     const institutionsLength = institutions.length;
     const coursesLength = courses.length;
     res.render("add-certificate", {
         editing: false,
+        name: req.user.username,
         institutions: institutions, courses: courses,
         certificatesNumber: certificatesLength,
         institutionsNumber: institutionsLength,
-        coursesNumber: coursesLength
+        coursesNumber: coursesLength,
+        employersNumber: employersLength
     });
 }
 exports.postAddCertiificate = (req, res) => {
@@ -83,17 +88,21 @@ exports.getCertificates = async (req, res) => {
     const institutions = await Institution.find();
     const courses = await Course.find();
     const certificates = await Certificate.find();
+    const employers = await Employer.find();
+    const employersLength = employers.length;
     const certificatesLength = certificates.length;
     const institutionsLength = institutions.length;
     const coursesLength = courses.length;
 
     Certificate.find({}).populate("institution").populate("course").then(certificates => {
         res.render("certificates", {
+            name: req.user.username,
             certificates: certificates,
             certificatesLength: certificates.length,
             certificatesNumber: certificatesLength,
             institutionsNumber: institutionsLength,
-            coursesNumber: coursesLength
+            coursesNumber: coursesLength,
+            employersNumber: employersLength
         })
 
     }).catch(err => {
@@ -104,6 +113,8 @@ exports.getEditCertificate = async (req, res, next) => {
     const allCertificates = await Certificate.find();
     const institutions = await Institution.find();
     const courses = await Course.find();
+    const employers = await Employer.find();
+    const employersLength = employers.length;
     const certificatesLength = allCertificates.length;
     const institutionsLength = institutions.length;
     const coursesLength = courses.length;
@@ -125,9 +136,11 @@ exports.getEditCertificate = async (req, res, next) => {
                 hasError: false,
                 errorMessage: null,
                 validationErrors: [],
+                name: req.user.username,
                 certificatesNumber: certificatesLength,
                 institutionsNumber: institutionsLength,
                 coursesNumber: coursesLength,
+                employersNumber: employersLength,
                 institutions: institutions,
                 courses: courses,
 
