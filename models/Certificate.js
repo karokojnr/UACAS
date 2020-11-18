@@ -31,5 +31,5 @@ const CertificateSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-});
+}, { usePushEach: true });
 module.exports = mongoose.model("Certificate", CertificateSchema);

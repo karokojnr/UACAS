@@ -9,14 +9,16 @@
 
             <!-- Dashboard Headline -->
             <div class="dashboard-headline">
-                <h3>Post a Certificate</h3>
+                <h3><% if (editing) { %>Edit
+                    Certificate<% } else { %>Post a Certificate<% } %></h3>
 
                 <!-- Breadcrumbs -->
                 <nav id="breadcrumbs" class="dark">
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Dashboard</a></li>
-                        <li>Add Certificate</li>
+                        <li><% if (editing) { %>Update
+                            Certificate<% } else { %>Add Certificate<% } %></li>
                     </ul>
                 </nav>
             </div>
@@ -33,7 +35,9 @@
                             <h3><i class="icon-feather-award"></i> Certificate Submission Form</h3>
                         </div>
                         <%- include ("./partials/messages") %>
-                        <form action="/post-add-certificate" method="POST">
+                        <form
+                            action="/<% if (editing) { %>post-edit-certificate<% } else { %>post-add-certificate<% } %>"
+                            method="POST">
 
                             <div class="content with-padding padding-bottom-10">
                                 <div class="row">
@@ -41,14 +45,17 @@
                                         <div class="submit-field">
                                             <h5>Certificate Number</h5>
                                             <input type="certificateNumber" class="with-border" name="certificateNumber"
-                                                id="certificateNumber">
+                                                id="certificateNumber"
+                                                value="<% if (editing) { %><%= certificate.certificateNumber %><% } %>">
+
                                         </div>
                                     </div>
 
                                     <div class="col-xl-4">
                                         <div class="submit-field">
                                             <h5>Surname</h5>
-                                            <input type="surname" class="with-border" name="surname" id="surname">
+                                            <input type="surname" class="with-border" name="surname" id="surname"
+                                                value="<% if (editing) { %><%= certificate.surname %><% } %>">
                                         </div>
                                     </div>
 
@@ -56,7 +63,8 @@
                                         <div class="submit-field">
                                             <h5>Other Names</h5>
                                             <input type="otherNames" class="with-border" name="otherNames"
-                                                id="otherNames">
+                                                id="otherNames"
+                                                value="<% if (editing) { %><%= certificate.otherNames %><% } %>">
                                         </div>
                                     </div>
 
@@ -80,7 +88,8 @@
                                     <div class="col-xl-4">
                                         <div class="submit-field">
                                             <h5>Registration Number</h5>
-                                            <input type="regNumber" class="with-border" name="regNumber" id="regNumber">
+                                            <input type="regNumber" class="with-border" name="regNumber" id="regNumber"
+                                                value="<% if (editing) { %><%= certificate.regNumber %><% } %>">
                                         </div>
                                     </div>
 
@@ -102,11 +111,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <% if (editing) { %>
+                            <input type="hidden" value="<%= certificate._id %>" name="certificateId">
+                            <% } %>
                             <div class="col-xl-12">
                                 <button type="submit" class="button ripple-effect big margin-top-30"><i
-                                        class="icon-feather-plus"></i> Add
-                                    Certificate
-                                </button>
+                                        class="<% if (editing) { %>icon-feather-edit<% } else { %>icon-feather-plus<% } %>"></i>
+                                    <% if (editing) { %>Update
+                                    Certificate<% } else { %>Add Certificate<% } %></button>
                             </div>
                         </form>
                     </div>

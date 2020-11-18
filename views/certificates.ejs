@@ -1,0 +1,109 @@
+<%- include('./includes/header.ejs') %>
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <%- include('./includes/side-bar.ejs') %>
+    <!-- Dashboard Content
+    ================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Manage Certificates</h3>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li>Manage Certificates</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+                        <div><%- include ("./partials/messages") %></div>
+
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-feather-award"></i> <%= certificatesLength %>
+                                Certificates
+                            </h3>
+                        </div>
+
+                        <div class="content">
+                            <ul class="dashboard-box-list">
+                                <% if (certificates.length > 0) { %>
+                                <% for (let certificate of certificates) { %>
+
+                                <li>
+                                    <!-- Overview -->
+                                    <div class="freelancer-overview manage-candidates">
+                                        <div class="freelancer-overview-inner">
+
+                                            <!-- Avatar
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="#"><img src="/images/user.png" alt=""></a>
+                                            </div> -->
+
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4><a href="#"><%= certificate.surname %>
+                                                        <%= certificate.otherNames %><img class="flag"
+                                                            src="/images/flags/ke.svg" alt="" title="Kenya"
+                                                            data-tippy-placement="top"></a>
+                                                </h4>
+                                                <div></div>
+                                                <h5>
+                                                    <%= certificate.course.courseName %>
+                                                </h5>
+
+                                                <!-- Details -->
+                                                <span class="freelancer-detail-item"><a href="#"><i
+                                                            class="icon-material-outline-folder-shared"></i><%= certificate.regNumber %></a></span>
+
+                                                <span class="freelancer-detail-item"><i
+                                                        class="icon-material-outline-account-balance"></i>
+                                                    <%= certificate.institution.institutionName %></span>
+                                                <!-- <span class="freelancer-detail-item"><i
+                                                        class="icon-material-outline-account-balance"></i>
+                                                    <%= certificate.course.courseName %></span> -->
+
+                                                <!-- Buttons -->
+                                                <div
+                                                    class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                    <a href="/get-edit-certificate/<%= certificate._id %>?edit=true"
+                                                        class="button ripple-effect"><i
+                                                            class="icon-line-awesome-pencil"></i> Update</a>
+                                                    <form
+                                                        action="/delete-certificate/<%= certificate._id %>?_method=DELETE"
+                                                        method="post">
+                                                        <button type="submit" class="btn btn-danger">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% } %>
+                                <% } else { %>
+                                <h1>No Certificates Found!</h1>
+                                <% } %>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Row / End -->
+
+            <%- include('./includes/footer.ejs') %>

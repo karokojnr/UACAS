@@ -9,14 +9,16 @@
 
             <!-- Dashboard Headline -->
             <div class="dashboard-headline">
-                <h3>Post a Course</h3>
+                <h3><% if (editing) { %>Edit
+                    Course<% } else { %>Post a Course<% } %></h3>
 
                 <!-- Breadcrumbs -->
                 <nav id="breadcrumbs" class="dark">
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Dashboard</a></li>
-                        <li>Add a Course</li>
+                        <li><% if (editing) { %>Edit
+                            Course<% } else { %>Add a Course<% } %></li>
                     </ul>
                 </nav>
             </div>
@@ -33,22 +35,28 @@
                             <h3><i class="icon-line-awesome-folder-open-o"></i> Course Submission Form</h3>
                         </div>
                         <%- include ("./partials/messages") %>
-                        <form action="/post-add-course" method="POST">
+                        <form action="/<% if (editing) { %>post-edit-course<% } else { %>post-add-course<% } %>"
+                            method="POST">
                             <div class="content with-padding padding-bottom-10">
                                 <div class="row">
                                     <div class="col-xl-4">
                                         <div class="submit-field">
                                             <h5>Course Name</h5>
                                             <input type="courseName" class="with-border" name="courseName"
-                                                id="courseName">
+                                                id="courseName"
+                                                value="<% if (editing) { %><%= course.courseName %><% } %>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <% if (editing) { %>
+                            <input type="hidden" value="<%= course._id %>" name="courseId">
+                            <% } %>
                             <div class="col-xl-12">
                                 <button type="submit" class="button ripple-effect big margin-top-30"><i
-                                        class="icon-feather-plus"></i> Add
-                                    Course
+                                        class="<% if (editing) { %>icon-feather-edit<% } else { %>icon-feather-plus<% } %>"></i><% if (editing) { %>
+                                    Update
+                                    Course<% } else { %>Add Course<% } %>
                                 </button>
                             </div>
                         </form>

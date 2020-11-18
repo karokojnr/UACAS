@@ -1,0 +1,85 @@
+<%- include('./includes/header.ejs') %>
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <%- include('./includes/side-bar.ejs') %>
+    <!-- Dashboard Content
+    ================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Manage Institutions</h3>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li>Manage Institutions</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-material-outline-account-balance"></i> <%= institutionsLength %>
+                                Institutions
+                            </h3>
+                        </div>
+
+                        <div class="container-fluid">
+                            <main>
+                                <div><%- include ("./partials/messages") %></div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Institution Name</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if (institutions.length > 0) { %>
+                                        <% for (let institution of institutions) { %>
+                                        <tr>
+                                            <td><%= institution.institutionName %></td>
+                                            <td>
+                                                <button class="btn btn-info">
+                                                    <a href="/get-edit-institution/<%= institution._id %>?edit=true">
+                                                        Update</a>
+                                                </button>
+
+                                            </td>
+                                            <td>
+                                                <form action="/delete-institution/<%= institution._id %>?_method=DELETE"
+                                                    method="post">
+                                                    <button type="submit" class="btn btn-danger">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% } else { %>
+                                        <h1>No Institutions Found!</h1>
+                                        <% } %>
+                                    </tbody>
+
+                                </table>
+                            </main>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Row / End -->
+
+            <%- include('./includes/footer.ejs') %>

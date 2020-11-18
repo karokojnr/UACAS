@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const methodOverride = require('method-override');
 const chalk = require("chalk");
 const path = require("path");
 const file = require("fs");
@@ -49,6 +50,9 @@ app.use(
 //Passport middleware --- location important
 app.use(passport.initialize());
 app.use(passport.session());
+// Method Override
+app.use(methodOverride('_method'));
+
 
 // Connect flash
 app.use(flash());
