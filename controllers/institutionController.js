@@ -24,8 +24,6 @@ exports.getAddInstitution = async (req, res) => {
 
 exports.postAddInstitution = (req, res) => {
     const { institutionName } = req.body;
-    console.log("Required Body")
-    console.log(req.body)
     let errors = [];
 
     if (!institutionName) {
@@ -58,7 +56,7 @@ exports.postAddInstitution = (req, res) => {
                             'success_msg',
                             'Instituion added successfully...'
                         );
-                        res.redirect('/');
+                        res.redirect('/institutions');
                     })
                     .catch(err => console.log(err));
             }
@@ -162,14 +160,14 @@ exports.activateInstitution = (req, res) => {
     const institutionId = req.params.id;
     Institution.findById(institutionId)
         .then((institution) => {
-            if (insitution.isInstitution === "YES") {
+            if (institution.isInstitution === "YES") {
                 req.flash("error_msg", "The Institution is already activated.");
                 res.redirect("/institutions");
             }
             institution.isInstitution = "YES";
             institution.save().then((updatedInstitution) => {
                 req.flash("success_msg", "Success! Institution activated.");
-                res.redirect("/institution");
+                res.redirect("/institutions");
             });
         })
         .catch((e) => {

@@ -25,8 +25,6 @@ exports.getAddCertificate = async (req, res) => {
 exports.postAddCertiificate = (req, res) => {
 
     const { certificateNumber, surname, otherNames, institution, regNumber, course } = req.body;
-    console.log("Required Body")
-    console.log(req.body)
     let errors = [];
 
     if (!certificateNumber || !surname || !institution || !otherNames || !regNumber || !course) {
@@ -77,7 +75,7 @@ exports.postAddCertiificate = (req, res) => {
                             'success_msg',
                             'Certificate added successfully...'
                         );
-                        res.redirect('/');
+                        res.redirect('/certificates');
                     })
                     .catch(err => console.log(err));
             }

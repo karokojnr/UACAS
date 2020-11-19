@@ -24,8 +24,6 @@ exports.getAddCourse = async (req, res) => {
 
 exports.postAddCourse = (req, res) => {
     const { courseName } = req.body;
-    console.log("Required Body")
-    console.log(req.body)
     let errors = [];
 
     if (!courseName) {
@@ -58,7 +56,7 @@ exports.postAddCourse = (req, res) => {
                             'success_msg',
                             'Course added successfully...'
                         );
-                        res.redirect('/');
+                        res.redirect('/courses');
                     })
                     .catch(err => console.log(err));
             }
@@ -124,8 +122,6 @@ exports.getEditCourse = async (req, res, next) => {
 }
 exports.postEditCourse = (req, res, next) => {
     const { courseId, courseName } = req.body;
-    console.log("Edit course req.body")
-    console.log(req.body)
     Course.findById(courseId)
         .then(course => {
             course.courseName = courseName;
